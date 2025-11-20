@@ -1,0 +1,35 @@
+name: Compress Images
+
+on:
+  push:
+    # Quan hi hagi canvis en imatges dins de projects/**
+    paths:
+      - "projects/**/*.jpg"
+      - "projects/**/*.jpeg"
+      - "projects/**/*.png"
+      - "projects/**/*.webp"
+      - "projects/**/*.avif"
+  workflow_dispatch:
+
+jobs:
+  compress:
+    name: calibreapp/image-actions
+    runs-on: ubuntu-latest
+    permissions: write-all
+
+    steps:
+      - name: Checkout Repo
+        uses: actions/checkout@v4
+
+      - name: Compress Images
+        uses: calibreapp/image-actions@main
+        with:
+          # IMPORTANT: no tocar mai els RAW
+          ignorePaths: "projects/**/raw/**"
+
+          # Paràmetres de qualitat (els pots ajustar més endavant)
+          jpegQuality: "85"
+          jpegProgressive: false
+          pngQuality: "80"
+          webpQuality: "85"
+          avifQuality: "75"
