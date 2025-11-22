@@ -1,0 +1,9 @@
+services:
+  - type: static_site
+    name: dev-cdn
+    env: static
+    repo: https://github.com/develmts/dev-cdn
+    branch: main
+    buildCommand: ""
+    publishPath: .
+    autoDeploy: true
